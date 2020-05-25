@@ -1,0 +1,31 @@
+CREATE TABLE Employee(EmpID integer PRIMARY KEY, EmpName char(55),Date_of_birth Date);
+
+CREATE TABLE Salary(EmpID integer REFERENCES Employee(EmpID) ,Salary integer);
+
+INSERT INTO Employee
+VALUES(1,'Karan','1988-10-16'),
+(2,'Darshit','1990-04-17'),
+(3,'Sudhanshu','1987-11-02'),
+(4,'Keval','1980-09-18')
+
+
+INSERT INTO Salary
+VALUES(1,25000),
+(2,22000),
+(3,40000),
+(4,28000)
+
+1st query
+
+SELECT sal.Salary,emp.EmpName
+FROM employee emp
+JOIN salary sal on sal.EmpID = emp.EmpID
+ORDER BY sal.Salary DESC
+LIMIT 1 OFFSET n
+
+2nd query
+
+UPDATE salary sal
+JOIN employee emp ON emp.EmpID = sal.EmpID
+SET sal.salary = 5000
+WHERE TIMESTAMPDIFF(YEAR, emp.Date_of_birth, DATE(now())) > 30
